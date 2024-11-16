@@ -2,29 +2,42 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+let op;
+let action;
 
-setInterval(DecreaseOpacity, 5000);
-//const increaseOpacityIntervalId = setInterval(IncreaseOpacity, 5000);
-
-//setTimeout(decreaseOpacityIntervalId, 5000);
-
-let op = 1;
-
-function IncreaseOpacity() {
-    let op = document.getElementById("MainImg").style.opacity;
-    document.getElementById("MainImg").style.opacity = op + 0.2;
-}
-
-function DecreaseOpacity() {
-    if (op === 0.0) {
-        ChangeImg();
-        
-    }
-    op -= 0.2;
-    document.getElementById("MainImg").style.opacity = op;
+function initSite() {
+    op = 1.0;
+    action = "fadeOut";
+    setInterval(ChangeImg, 300);
 }
 
 function ChangeImg() {
+
+    if (action === "fadeOut") {
+        if (op > 0.2) {
+            op -= 0.05;
+            document.getElementById("MainImg").style.opacity = op;
+        }
+        else {
+            action = "ChangeImg";
+        }
+    }
+    else if (action === "fadeIn") {
+        if (op < 1.0) {
+            op += 0.05;
+            document.getElementById("MainImg").style.opacity = op;
+        }
+        else {
+            action = "fadeOut";
+        }
+    }
+    else if(action === "ChangeImg") {
+        SetImg();
+        action = "fadeIn";
+    }
+}
+
+function SetImg() {
 
     if (document.getElementById("MainImg").src.includes('pic1.jpg')) {
         document.getElementById("MainImg").src = 'Media/pic2.jpg';
