@@ -4,18 +4,27 @@
 // Write your JavaScript code.
 let op;
 let action;
+let intervalId;
 
 function initSite() {
     op = 1.0;
     action = "fadeOut";
-    setInterval(ChangeImg, 300);
+
+    if (document.getElementById("MainImg")) {
+        if (!intervalId) {
+            intervalId = setInterval(ChangeImg, 500);
+        }
+    }
+    else {
+        clearInterval(intervalId);
+    }
 }
 
 function ChangeImg() {
 
     if (action === "fadeOut") {
-        if (op > 0.2) {
-            op -= 0.05;
+        if (op > 0.5) {
+            op -= 0.25;
             document.getElementById("MainImg").style.opacity = op;
         }
         else {
@@ -24,14 +33,14 @@ function ChangeImg() {
     }
     else if (action === "fadeIn") {
         if (op < 1.0) {
-            op += 0.05;
+            op += 0.25;
             document.getElementById("MainImg").style.opacity = op;
         }
         else {
             action = "fadeOut";
         }
     }
-    else if(action === "ChangeImg") {
+    else if (action === "ChangeImg") {
         SetImg();
         action = "fadeIn";
     }
@@ -66,5 +75,20 @@ function SetImg() {
         document.getElementById("lbl2").style.backgroundColor = 'gray';
         document.getElementById("lbl3").style.backgroundColor = 'gray';
         document.getElementById("lbl4").style.backgroundColor = 'gray';
+    }
+}
+
+function StopInterval() {
+    clearInterval(intervalId);
+    intervalId = null;
+}
+
+function CheckForImg() {
+    if (!document.getElementById("MainImg")) {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+    else {
+        initSite();
     }
 }
