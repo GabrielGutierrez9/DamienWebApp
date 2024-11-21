@@ -12,7 +12,7 @@ function initSite() {
 
     if (document.getElementById("MainImg")) {
         if (!intervalId) {
-            intervalId = setInterval(ChangeImg, 500);
+            intervalId = setInterval(ChangeImg, 350);
         }
     }
     else {
@@ -24,7 +24,7 @@ function ChangeImg() {
 
     if (action === "fadeOut") {
         if (op > 0.5) {
-            op -= 0.25;
+            op -= 0.1;
             document.getElementById("MainImg").style.opacity = op;
         }
         else {
@@ -33,7 +33,7 @@ function ChangeImg() {
     }
     else if (action === "fadeIn") {
         if (op < 1.0) {
-            op += 0.25;
+            op += 0.1;
             document.getElementById("MainImg").style.opacity = op;
         }
         else {
