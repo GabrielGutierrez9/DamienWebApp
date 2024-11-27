@@ -12,7 +12,7 @@ function initSite() {
 
     if (document.getElementById("MainImg")) {
         if (!intervalId) {
-            intervalId = setInterval(ChangeImg, 350);
+            intervalId = setInterval(ChangeImg, 10);
         }
     }
     else {
@@ -20,11 +20,18 @@ function initSite() {
     }
 }
 
+function ChangeImgManual() {
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+    SetImg();
+}
+
 function ChangeImg() {
 
     if (action === "fadeOut") {
-        if (op > 0.5) {
-            op -= 0.1;
+        if (op > 0.0) {
+            op -= 0.01;
             document.getElementById("MainImg").style.opacity = op;
         }
         else {
@@ -32,8 +39,8 @@ function ChangeImg() {
         }
     }
     else if (action === "fadeIn") {
-        if (op < 1.0) {
-            op += 0.1;
+        if (op < 2.0) {
+            op += 0.01;
             document.getElementById("MainImg").style.opacity = op;
         }
         else {
