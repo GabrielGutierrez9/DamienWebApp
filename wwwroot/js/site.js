@@ -25,6 +25,7 @@ function ChangeImgManual() {
         clearInterval(intervalId);
     }
     SetImg();
+    document.getElementById("MainImg").style.opacity = 1.0;
 }
 
 function ChangeImg() {
